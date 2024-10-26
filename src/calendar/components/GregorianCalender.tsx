@@ -18,6 +18,7 @@ type GregorianCalendar = {
   setSelectedDate: React.Dispatch<
     React.SetStateAction<SelectedDate | undefined>
   >;
+  minDate?: { year: number; month: number; day: number };
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
@@ -33,6 +34,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     hideHeaderButtons,
     selectedDate,
     setSelectedDate,
+    minDate
   } = props;
 
   const [day, _setDate] = useState(1);
@@ -98,9 +100,24 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     }
   }, [month]);
 
+  const setYears = useCallback((year: any) => {
+    setYear(year)
+  }, [year]);
+
+  const setMonths = useCallback((newMonth: any) => {
+    setMonth(() => newMonth)
+  }, [month]);
+
   const currentDay = useMemo(() => {
     return new Date().getDate();
   }, []);
+
+  const isBeforeMinDate = (day: number) => {
+    if (!minDate) return false;
+    const selectedDate = new Date(year, month - 1, day);
+    const min = new Date(minDate.year, minDate.month - 1, minDate.day);
+    return selectedDate < min;
+  };
 
   const today = (iDate: number) => {
     return (
@@ -123,6 +140,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
 
   const handleDayPress = (pressedDay: number) => {
     const convertToEthiopic = toEthiopic(year, month, pressedDay);
+    if (isBeforeMinDate(pressedDay)) return;
 
     setSelectedDate({
       ethiopian: {
@@ -159,7 +177,9 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
         next={next}
         prev={prev}
         month={month}
+        setMonths={setMonths}
         year={year}
+        setYears={setYears}
         locals={'ENG'}
         mode="GC"
         theme={theme}
@@ -185,6 +205,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
             selected={selected(i + 1)}
             onPress={() => handleDayPress(i + 1)}
             theme={theme}
+            disabled={isBeforeMinDate(i + 1)}
           />
         ))}
         {/* EXTRA DAYS IN THE CALENDAR */}

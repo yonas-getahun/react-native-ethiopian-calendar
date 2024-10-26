@@ -24,6 +24,7 @@ type EthiopianCalenderProps = {
   setSelectedDate: React.Dispatch<
     React.SetStateAction<SelectedDate | undefined>
   >;
+  minDate?: { year: number; month: number; day: number };
 };
 
 export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
@@ -41,6 +42,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     hideHeaderButtons,
     selectedDate,
     setSelectedDate,
+    minDate
   } = props;
 
   const styles = makeStyle(theme);
@@ -142,6 +144,14 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     }
   }, [month]);
 
+  const setYears  = useCallback((year:any) => {
+    setYear(year)
+  }, [year]);
+
+  const setMonths  = useCallback((newMonth:any) => {
+    setMonth(() => newMonth)
+  }, [month]);
+
   const prev = useCallback(() => {
     const newMonth = month - 1;
     if (newMonth < 1) {
@@ -151,6 +161,13 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
       setMonth(() => newMonth);
     }
   }, [month]);
+
+  const isBeforeMinDate = (day: number) => {
+    if (!minDate) return false;
+    const selectedDate = new Date(year, month - 1, day);
+    const min = new Date(minDate.year, minDate.month - 1, minDate.day);
+    return selectedDate < min;
+  };
 
   const today = (iDate: number) => {
     return (
@@ -208,7 +225,9 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
         next={next}
         prev={prev}
         month={month}
+        setMonths={setMonths}
         year={year}
+        setYears={setYears}
         locals={locale}
         mode={'EC'}
         theme={theme}
@@ -236,6 +255,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
                 selected={selected(i + 1)}
                 onPress={() => handleDayPress(i + 1)}
                 theme={theme}
+                disabled={isBeforeMinDate(i + 1)}
               />
             ))
           : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
@@ -249,6 +269,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
                 selected={selected(i + 1)}
                 onPress={() => handleDayPress(i + 1)}
                 theme={theme}
+                disabled={isBeforeMinDate(i + 1)}
               />
             ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
