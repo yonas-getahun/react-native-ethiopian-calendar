@@ -25,6 +25,7 @@ type EthiopianCalenderProps = {
     React.SetStateAction<SelectedDate | undefined>
   >;
   minDate?: { year: number; month: number; day: number };
+  maxDate?: { year: number; month: number; day: number };
 };
 
 export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
@@ -42,7 +43,8 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     hideHeaderButtons,
     selectedDate,
     setSelectedDate,
-    minDate
+    minDate,
+    maxDate
   } = props;
 
   const styles = makeStyle(theme);
@@ -169,6 +171,13 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     return selectedDate < min;
   };
 
+  const isAfterMaxDate = (day: number) => {
+    if (!maxDate) return false;
+    const selectedDate = new Date(year, month - 1, day);
+    const max = new Date(maxDate.year, maxDate.month - 1, maxDate.day);
+    return selectedDate > max;
+  };
+
   const today = (iDate: number) => {
     return (
       iDate === currentDay &&
@@ -255,7 +264,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
                 selected={selected(i + 1)}
                 onPress={() => handleDayPress(i + 1)}
                 theme={theme}
-                disabled={isBeforeMinDate(i + 1)}
+                disabled={isBeforeMinDate(i + 1) || isAfterMaxDate(i + 1)}
               />
             ))
           : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
@@ -269,7 +278,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
                 selected={selected(i + 1)}
                 onPress={() => handleDayPress(i + 1)}
                 theme={theme}
-                disabled={isBeforeMinDate(i + 1)}
+                disabled={isBeforeMinDate(i + 1) || isAfterMaxDate(i + 1)}
               />
             ))}
         {/* EXTRA DAYS IN THE CALENDAR */}

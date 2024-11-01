@@ -51,6 +51,7 @@ type Props = {
    */
   initialDate?: Date;
   minDate?: { year: number; month: number; day: number };
+  maxDate?: { year: number; month: number; day: number };
 };
 
 export const Calendar: React.FC<Props> = React.memo((props) => {
@@ -63,7 +64,8 @@ export const Calendar: React.FC<Props> = React.memo((props) => {
     hideHeaderButtons,
     theme,
     initialDate,
-    minDate
+    minDate,
+    maxDate
   } = props;
 
   const [selectedDate, setSelectedDate] = useState<SelectedDate>();
@@ -87,6 +89,7 @@ export const Calendar: React.FC<Props> = React.memo((props) => {
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
         minDate={toEthiopic(minDate?.year,minDate?.month,minDate?.day)}
+        maxDate={toEthiopic(maxDate?.year,maxDate?.month,maxDate?.day)}
       />
     );
   return (
@@ -99,6 +102,7 @@ export const Calendar: React.FC<Props> = React.memo((props) => {
         }
       }
       minDate={minDate}
+      maxDate={maxDate}
       onDatePress={onDatePress}
       theme={theme}
       onModeChange={onModeChange}

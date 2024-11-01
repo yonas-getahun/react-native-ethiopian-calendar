@@ -19,6 +19,7 @@ type GregorianCalendar = {
     React.SetStateAction<SelectedDate | undefined>
   >;
   minDate?: { year: number; month: number; day: number };
+  maxDate?: { year: number; month: number; day: number };
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
@@ -34,7 +35,8 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     hideHeaderButtons,
     selectedDate,
     setSelectedDate,
-    minDate
+    minDate,
+    maxDate
   } = props;
 
   const [day, _setDate] = useState(1);
@@ -117,6 +119,13 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     const selectedDate = new Date(year, month - 1, day);
     const min = new Date(minDate.year, minDate.month - 1, minDate.day);
     return selectedDate < min;
+  };
+
+  const isAfterMaxDate = (day: number) => {
+    if (!maxDate) return false;
+    const selectedDate = new Date(year, month - 1, day);
+    const max = new Date(maxDate.year, maxDate.month - 1, maxDate.day);
+    return selectedDate > max;
   };
 
   const today = (iDate: number) => {
@@ -205,7 +214,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
             selected={selected(i + 1)}
             onPress={() => handleDayPress(i + 1)}
             theme={theme}
-            disabled={isBeforeMinDate(i + 1)}
+            disabled={isBeforeMinDate(i + 1) || isAfterMaxDate(i + 1)}
           />
         ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
