@@ -86,7 +86,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     const newMonth = month + 1;
     if (newMonth > 12) {
       setMonth(1);
-      setYear((previous) => previous + 1);
+      setYear((previous: number) => previous + 1);
     } else {
       setMonth(newMonth);
     }
@@ -96,7 +96,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     const newMonth = month - 1;
     if (newMonth < 1) {
       setMonth(12);
-      setYear((previous) => previous - 1);
+      setYear((previous: number) => previous - 1);
     } else {
       setMonth(newMonth);
     }

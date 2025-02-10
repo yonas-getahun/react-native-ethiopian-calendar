@@ -131,26 +131,26 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     ).year as number;
   }, []);
 
-  const gotoToday = useCallback(()=> {
-      setMonth(currentMonthIndex)
-      setYear(currentYear)
+  const gotoToday = useCallback(() => {
+    setMonth(currentMonthIndex)
+    setYear(currentYear)
   }, [currentYear, currentMonthIndex])
 
   const next = useCallback(() => {
     const newMonth = month + 1;
     if (newMonth > 13) {
       setMonth(() => 1);
-      setYear((previous) => previous + 1);
+      setYear((previous: number) => previous + 1);
     } else {
       setMonth(() => newMonth);
     }
   }, [month]);
 
-  const setYears  = useCallback((year:any) => {
+  const setYears = useCallback((year: any) => {
     setYear(year)
   }, [year]);
 
-  const setMonths  = useCallback((newMonth:any) => {
+  const setMonths = useCallback((newMonth: any) => {
     setMonth(() => newMonth)
   }, [month]);
 
@@ -158,7 +158,7 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
     const newMonth = month - 1;
     if (newMonth < 1) {
       setMonth(() => 13);
-      setYear((previous) => previous - 1);
+      setYear((previous: number) => previous - 1);
     } else {
       setMonth(() => newMonth);
     }
@@ -257,30 +257,30 @@ export const EthiopianCalender: React.FC<EthiopianCalenderProps> = (props) => {
         {/* EXCEPT TO ጳጉሜ, EVERY OTHER MONTH HAS EXACTLY 30 DAYS.*/}
         {month !== 13
           ? iterator(30).map((_item, i) => (
-              <Day
-                key={i}
-                dayNumber={i + 1}
-                today={today(i + 1)}
-                selected={selected(i + 1)}
-                onPress={() => handleDayPress(i + 1)}
-                theme={theme}
-                disabled={isBeforeMinDate(i + 1) || isAfterMaxDate(i + 1)}
-              />
-            ))
+            <Day
+              key={i}
+              dayNumber={i + 1}
+              today={today(i + 1)}
+              selected={selected(i + 1)}
+              onPress={() => handleDayPress(i + 1)}
+              theme={theme}
+              disabled={isBeforeMinDate(i + 1) || isAfterMaxDate(i + 1)}
+            />
+          ))
           : // IF THE MONTH IS ጳጉሜ(13TH MONTH)
-            // IF IT'S ETHIOPIAN LEAP YEAR, THE MONTH WILL 6 DAYS
-            // ELSE IT WILL HAVE % DAYS
-            iterator(ethiopicCalendar.isLeap(year) ? 6 : 5).map((_item, i) => (
-              <Day
-                key={i}
-                dayNumber={i + 1}
-                today={today(i + 1)}
-                selected={selected(i + 1)}
-                onPress={() => handleDayPress(i + 1)}
-                theme={theme}
-                disabled={isBeforeMinDate(i + 1) || isAfterMaxDate(i + 1)}
-              />
-            ))}
+          // IF IT'S ETHIOPIAN LEAP YEAR, THE MONTH WILL 6 DAYS
+          // ELSE IT WILL HAVE % DAYS
+          iterator(ethiopicCalendar.isLeap(year) ? 6 : 5).map((_item, i) => (
+            <Day
+              key={i}
+              dayNumber={i + 1}
+              today={today(i + 1)}
+              selected={selected(i + 1)}
+              onPress={() => handleDayPress(i + 1)}
+              theme={theme}
+              disabled={isBeforeMinDate(i + 1) || isAfterMaxDate(i + 1)}
+            />
+          ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
         {iterator(nextDays).map((_item, i) => (
           <Day key={i} dayNumber={i + 1} extraDays theme={theme} />
