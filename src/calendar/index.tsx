@@ -3,7 +3,7 @@ import type { SelectedDate, Theme } from 'src/types';
 import type { LanguageCode, Mode } from '../utils/locals/types';
 import { EthiopianCalender } from './components/EthiopianCalendar';
 import { GregorianCalendar } from './components/GregorianCalender';
-
+import {toEthiopic} from '../utils/Calendar/Convertor';
 type Props = {
   /**
    * set to 'EC' or 'GC' to switch between Gregorian calendar & Ethiopian calendar.
@@ -50,6 +50,8 @@ type Props = {
    * @type {Date}
    */
   initialDate?: Date;
+  minDate?: { year: number; month: number; day: number };
+  maxDate?: { year: number; month: number; day: number };
 };
 
 export const Calendar: React.FC<Props> = React.memo((props) => {
@@ -62,6 +64,8 @@ export const Calendar: React.FC<Props> = React.memo((props) => {
     hideHeaderButtons,
     theme,
     initialDate,
+    minDate,
+    maxDate
   } = props;
 
   const [selectedDate, setSelectedDate] = useState<SelectedDate>();
@@ -84,6 +88,8 @@ export const Calendar: React.FC<Props> = React.memo((props) => {
         hideHeaderButtons={hideHeaderButtons}
         selectedDate={selectedDate}
         setSelectedDate={setSelectedDate}
+        minDate={toEthiopic(minDate?.year,minDate?.month,minDate?.day)}
+        maxDate={toEthiopic(maxDate?.year,maxDate?.month,maxDate?.day)}
       />
     );
   return (
@@ -95,6 +101,8 @@ export const Calendar: React.FC<Props> = React.memo((props) => {
           day: initialDate.getDate(),
         }
       }
+      minDate={minDate}
+      maxDate={maxDate}
       onDatePress={onDatePress}
       theme={theme}
       onModeChange={onModeChange}

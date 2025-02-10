@@ -6,6 +6,8 @@ A react native calendar component which is mainly intended for applications whic
 
 - Ethiopian/Gregorian mode toggle
 - Supports multiple local languages
+- Supports month and year selection
+- Supports minimum date selection
 - Easy to customize
 - Zero dependency
 - Fully typed with typescript
@@ -48,16 +50,6 @@ function App() {
   const [mode, setMode] = React.useState<Mode>('EC');
   const [locale, setLocale] = React.useState<LanguageCode>('AMH');
   const [selectedDate, setSelectedDate] = React.useState<SelectedDate>();
-
-  const formatDate = (date: Date) => {
-    const UtcDate = new Date(date)
-    const newDate = {
-      year: UtcDate.getFullYear(),
-      month: UtcDate.getMonth() + 1,
-      day: UtcDate.getDate(),
-    }
-    return newDate
-  }
 
   const maxDate = {
       year: today.getFullYear() + 18,

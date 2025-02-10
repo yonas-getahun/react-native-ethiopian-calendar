@@ -18,6 +18,8 @@ type GregorianCalendar = {
   setSelectedDate: React.Dispatch<
     React.SetStateAction<SelectedDate | undefined>
   >;
+  minDate?: { year: number; month: number; day: number };
+  maxDate?: { year: number; month: number; day: number };
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
@@ -33,6 +35,8 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     hideHeaderButtons,
     selectedDate,
     setSelectedDate,
+    minDate,
+    maxDate
   } = props;
 
   const [day, _setDate] = useState(1);
@@ -82,7 +86,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     const newMonth = month + 1;
     if (newMonth > 12) {
       setMonth(1);
-      setYear((previous) => previous + 1);
+      setYear((previous: number) => previous + 1);
     } else {
       setMonth(newMonth);
     }
@@ -92,15 +96,37 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     const newMonth = month - 1;
     if (newMonth < 1) {
       setMonth(12);
-      setYear((previous) => previous - 1);
+      setYear((previous: number) => previous - 1);
     } else {
       setMonth(newMonth);
     }
   }, [month]);
 
+  const setYears = useCallback((year: any) => {
+    setYear(year)
+  }, [year]);
+
+  const setMonths = useCallback((newMonth: any) => {
+    setMonth(() => newMonth)
+  }, [month]);
+
   const currentDay = useMemo(() => {
     return new Date().getDate();
   }, []);
+
+  const isBeforeMinDate = (day: number) => {
+    if (!minDate) return false;
+    const selectedDate = new Date(year, month - 1, day);
+    const min = new Date(minDate.year, minDate.month - 1, minDate.day);
+    return selectedDate < min;
+  };
+
+  const isAfterMaxDate = (day: number) => {
+    if (!maxDate) return false;
+    const selectedDate = new Date(year, month - 1, day);
+    const max = new Date(maxDate.year, maxDate.month - 1, maxDate.day);
+    return selectedDate > max;
+  };
 
   const today = (iDate: number) => {
     return (
@@ -123,6 +149,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
 
   const handleDayPress = (pressedDay: number) => {
     const convertToEthiopic = toEthiopic(year, month, pressedDay);
+    if (isBeforeMinDate(pressedDay)) return;
 
     setSelectedDate({
       ethiopian: {
@@ -159,7 +186,9 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
         next={next}
         prev={prev}
         month={month}
+        setMonths={setMonths}
         year={year}
+        setYears={setYears}
         locals={'ENG'}
         mode="GC"
         theme={theme}
@@ -185,6 +214,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
             selected={selected(i + 1)}
             onPress={() => handleDayPress(i + 1)}
             theme={theme}
+            disabled={isBeforeMinDate(i + 1) || isAfterMaxDate(i + 1)}
           />
         ))}
         {/* EXTRA DAYS IN THE CALENDAR */}
