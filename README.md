@@ -113,6 +113,8 @@ function App() {
 | `onModeChange`      | `function void` | `false`  | an event handler gets invoked on mode change.                        |                             |
 | `onLanguageChange`  | `function void` | `false`  | an event handler gets invoked on language change.                    |                             |
 | `initialDate`       | `Date`          | `false`  | if this prop is not set, the calendar will start from current month. | `today`                     |
+| `minDate`           | `Date`          | `false`  | to give minimum selectable date and date below the given will not be selectable. |                 |
+| `maxDate`           | `Date`          | `false`  | to give maximum selectable date and date above the given will not be selectable. |                 |
 
 ## License
 
