@@ -7,6 +7,7 @@ import { Day } from './day';
 import { Header } from './header';
 import { makeStyle } from './styles';
 import { toEthiopic } from '../../utils/Calendar';
+import type { BasicDate } from 'src/utils/Calendar/Core';
 
 type GregorianCalendar = {
   onDatePress: (date: SelectedDate) => void;
@@ -18,8 +19,8 @@ type GregorianCalendar = {
   setSelectedDate: React.Dispatch<
     React.SetStateAction<SelectedDate | undefined>
   >;
-  minDate?: { year: number; month: number; day: number };
-  maxDate?: { year: number; month: number; day: number };
+  minDate?: BasicDate | null;
+  maxDate?: BasicDate | null;
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
@@ -36,7 +37,7 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     selectedDate,
     setSelectedDate,
     minDate,
-    maxDate
+    maxDate,
   } = props;
 
   const [day, _setDate] = useState(1);
@@ -102,13 +103,13 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
     }
   }, [month]);
 
-  const setYears = useCallback((year: any) => {
-    setYear(year)
-  }, [year]);
+  const setYears = useCallback((year) => {
+    setYear(year);
+  }, []);
 
-  const setMonths = useCallback((newMonth: any) => {
-    setMonth(() => newMonth)
-  }, [month]);
+  const setMonths = useCallback((newMonth) => {
+    setMonth(() => newMonth);
+  }, []);
 
   const currentDay = useMemo(() => {
     return new Date().getDate();
@@ -117,14 +118,22 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
   const isBeforeMinDate = (day: number) => {
     if (!minDate) return false;
     const selectedDate = new Date(year, month - 1, day);
-    const min = new Date(minDate.year, minDate.month - 1, minDate.day);
+    const min = new Date(
+      minDate.year ?? 0,
+      minDate.month ?? 0 - 1,
+      minDate.day
+    );
     return selectedDate < min;
   };
 
   const isAfterMaxDate = (day: number) => {
     if (!maxDate) return false;
     const selectedDate = new Date(year, month - 1, day);
-    const max = new Date(maxDate.year, maxDate.month - 1, maxDate.day);
+    const max = new Date(
+      maxDate.year ?? 0,
+      maxDate.month ?? 0 - 1,
+      maxDate.day
+    );
     return selectedDate > max;
   };
 

@@ -20,7 +20,7 @@ export const makeStyle = (theme: Theme = {}) => {
       backgroundColor: mergedStyles.headerBackgroundColor,
       padding: 10,
       zIndex: 9999,
-      borderRadius: 15
+      borderRadius: 15,
     } as ViewStyle,
     daysHeader: {
       flexDirection: 'row',
@@ -82,7 +82,7 @@ export const makeStyle = (theme: Theme = {}) => {
       flexDirection: 'row',
       justifyContent: 'space-between',
       marginHorizontal: 50,
-      marginTop: 15
+      marginTop: 15,
     } as ViewStyle,
     pickerItemContainer: {
       flexDirection: 'row',
@@ -136,25 +136,25 @@ export const makeStyle = (theme: Theme = {}) => {
     } as ViewStyle,
     modalContainer: {
       flex: 1,
-      backgroundColor: "#55555599",
-      justifyContent: "center"
+      backgroundColor: '#55555599',
+      justifyContent: 'center',
     } as ViewStyle,
     modalItemContainer: {
-      backgroundColor: "#fff",
+      backgroundColor: '#fff',
       borderRadius: 20,
       paddingTop: 20,
       marginHorizontal: 20,
       gap: 10,
-      alignItems: "center",
+      alignItems: 'center',
     } as ViewStyle,
     monthPicker: {
       flexDirection: 'row',
       marginLeft: 20,
-      marginBottom: 10
+      marginBottom: 10,
     } as ViewStyle,
     closeContainer: {
       alignItems: 'flex-end',
-      marginRight: 20
+      marginRight: 20,
     } as ViewStyle,
   });
 };
