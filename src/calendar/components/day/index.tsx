@@ -10,6 +10,7 @@ type DayProps = {
   selected?: boolean;
   onPress?: () => void;
   theme?: Theme;
+  disabled?: boolean;
 };
 
 export const Day: React.FC<DayProps> = React.memo((props) => {

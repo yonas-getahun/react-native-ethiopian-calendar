@@ -52,14 +52,12 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
     }
 
     return years;
-  }
+  };
 
-  const [showYearPicker, setShowYearPicker,] = useState(false)
-  const [showMonthPicker, setShowMonthPicker] = useState(false)
-
+  const [showYearPicker, setShowYearPicker] = useState(false);
+  const [showMonthPicker, setShowMonthPicker] = useState(false);
 
   const YearPicker = ({ initialYear, onYearSelect }: any) => {
-
     const [currentStartYear, setCurrentStartYear] = useState(initialYear);
     const years = getYears(currentStartYear);
 
@@ -110,7 +108,6 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
               </TouchableOpacity>
             </View>
           ))}
-
         </View>
       </View>
     );
@@ -143,7 +140,10 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
               style={styles.arrowImage}
             />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.dropDown} onPress={() => setShowYearPicker(true)}>
+          <TouchableOpacity
+            style={styles.dropDown}
+            onPress={() => setShowYearPicker(true)}
+          >
             <Text style={styles.titleText}>{currentStartYear}</Text>
             <View style={{ marginRight: 5 }}>
               <Image
@@ -172,15 +172,13 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
               </TouchableOpacity>
             </View>
           ))}
-
         </View>
       </View>
     );
   };
 
-
   return (
-    <View >
+    <View>
       {/* EXTRA HEADER */}
       {!hideHeaderButtons && (
         <View style={styles.headerButtonsWrapper}>
@@ -211,7 +209,10 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
 
         <View style={styles.headerTitle}>
           <View style={styles.dropDown}>
-            <TouchableOpacity onPress={() => setShowMonthPicker(true)} style={{ flexDirection: 'row' }}>
+            <TouchableOpacity
+              onPress={() => setShowMonthPicker(true)}
+              style={{ flexDirection: 'row' }}
+            >
               <Text style={styles.titleText}>
                 {getMonthsName({ locals, mode })[month - 1]}
               </Text>
@@ -225,7 +226,10 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
           </View>
           <View style={styles.space} />
           <View style={styles.dropDown}>
-            <TouchableOpacity onPress={() => setShowYearPicker(true)} style={{ flexDirection: 'row' }} >
+            <TouchableOpacity
+              onPress={() => setShowYearPicker(true)}
+              style={{ flexDirection: 'row' }}
+            >
               <Text style={styles.titleText}>{year}</Text>
               <View style={{ marginTop: 10, marginRight: 5 }}>
                 <Image
@@ -235,7 +239,6 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
               </View>
             </TouchableOpacity>
           </View>
-
         </View>
 
         {/* FORWARD THE MONTH */}
@@ -261,14 +264,14 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
         animationType="fade"
         onRequestClose={() => setShowMonthPicker(false)}
       >
-        <View style={styles.modalContainer} >
+        <View style={styles.modalContainer}>
           <View style={styles.modalItemContainer}>
             <MonthPicker
               initialYear={year}
               onMonthSelect={(month: any, index: number) => {
-                console.log(month, index + 1)
-                setMonths(index + 1)
-                setShowMonthPicker(false)
+                console.log(month, index + 1);
+                setMonths(index + 1);
+                setShowMonthPicker(false);
               }}
             />
           </View>
@@ -285,8 +288,8 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
             <YearPicker
               initialYear={year}
               onYearSelect={(year: any) => {
-                setYears(year)
-                setShowYearPicker(false)
+                setYears(year);
+                setShowYearPicker(false);
               }}
             />
           </View>
