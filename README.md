@@ -12,6 +12,10 @@ A react native calendar component which is mainly intended for applications whic
 - Zero dependency
 - Fully typed with typescript
 
+## Newly Added Features
+- Month and year picker Modal
+- min and max Date 
+
 ## Demo
 
 ![](https://media.giphy.com/media/FrjD4KFbOvIRR5vyBX/giphy.gif)
@@ -47,12 +51,17 @@ function App() {
   const [locale, setLocale] = React.useState<LanguageCode>('AMH');
   const [selectedDate, setSelectedDate] = React.useState<SelectedDate>();
 
-  const today = new Date();
+  const maxDate = {
+      year: today.getFullYear() + 18,
+      month: today.getMonth() + 1, 
+      day: today.getDate(),
+  }
+
   const minDate = {
-      year: today.getFullYear(),
+      year: today.getFullYear() - 18,
       month: today.getMonth() + 1,
       day: today.getDate(),
-  };
+  }
 
   return (
       <Calendar
@@ -61,6 +70,7 @@ function App() {
         onModeChange={(selectedMode) => setMode(selectedMode)}
         onLanguageChange={(lang) => setLocale(lang)}
         locale={locale}
+        maxDate={maxDate}
         minDate={minDate}
       />
   )
@@ -84,6 +94,8 @@ function App() {
       onModeChange={(selectedMode) => setMode(selectedMode)}
       onLanguageChange={(lang) => setLocale(lang)}
       locale={locale}
+      maxDate={maxDate ? formatDate(maxDate) : undefined}
+      minDate={minDate ? formatDate(minDate) : undefined}
     />
   );
 }
