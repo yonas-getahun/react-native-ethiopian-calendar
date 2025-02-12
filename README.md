@@ -117,6 +117,7 @@ function App() {
 | `minDate`           | `Date`          | `false`  | to give minimum selectable date and date below the given will not be selectable. |                             |
 | `maxDate`           | `Date`          | `false`  | to give maximum selectable date and date above the given will not be selectable. |                             |
 
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
