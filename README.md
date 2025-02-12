@@ -95,8 +95,8 @@ function App() {
       onModeChange={(selectedMode) => setMode(selectedMode)}
       onLanguageChange={(lang) => setLocale(lang)}
       locale={locale}
-      maxDate={maxDate ? formatDate(maxDate) : undefined}
-      minDate={minDate ? formatDate(minDate) : undefined}
+      maxDate={maxDate}
+      minDate={minDate}
     />
   );
 }
