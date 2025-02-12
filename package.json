@@ -1,6 +1,6 @@
 {
   "name": "react-native-ethiopian-calendar-date-picker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A react native calendar component which is mainly intended for applications which require Ethiopian calendar.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
