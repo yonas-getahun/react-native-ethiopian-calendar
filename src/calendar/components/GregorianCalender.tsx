@@ -7,7 +7,6 @@ import { Day } from './day';
 import { Header } from './header';
 import { makeStyle } from './styles';
 import { toEthiopic } from '../../utils/Calendar';
-import type { BasicDate } from 'src/utils/Calendar/Core';
 
 type GregorianCalendar = {
   onDatePress: (date: SelectedDate) => void;
@@ -19,8 +18,8 @@ type GregorianCalendar = {
   setSelectedDate: React.Dispatch<
     React.SetStateAction<SelectedDate | undefined>
   >;
-  minDate?: BasicDate | null;
-  maxDate?: BasicDate | null;
+  minDate?: any;
+  maxDate?: any;
 };
 
 export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
@@ -118,22 +117,14 @@ export const GregorianCalendar: React.FC<GregorianCalendar> = (props) => {
   const isBeforeMinDate = (day: number) => {
     if (!minDate) return false;
     const selectedDate = new Date(year, month - 1, day);
-    const min = new Date(
-      minDate.year ?? 0,
-      minDate.month ?? 0 - 1,
-      minDate.day
-    );
+    const min = new Date(minDate.year, minDate.month - 1, minDate.day);
     return selectedDate < min;
   };
 
   const isAfterMaxDate = (day: number) => {
     if (!maxDate) return false;
     const selectedDate = new Date(year, month - 1, day);
-    const max = new Date(
-      maxDate.year ?? 0,
-      maxDate.month ?? 0 - 1,
-      maxDate.day
-    );
+    const max = new Date(maxDate.year, maxDate.month - 1, maxDate.day);
     return selectedDate > max;
   };
 
