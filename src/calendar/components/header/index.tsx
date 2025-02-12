@@ -118,10 +118,12 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
 
     const prev = () => {
       setCurrentStartYear((prevYear: any) => prevYear - 1);
+      setYears(currentStartYear - 1);
     };
 
     const next = () => {
       setCurrentStartYear((prevYear: any) => prevYear + 1);
+      setYears(currentStartYear + 1);
     };
     return (
       <View>
@@ -216,7 +218,7 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
               <Text style={styles.titleText}>
                 {getMonthsName({ locals, mode })[month - 1]}
               </Text>
-              <View style={{ marginTop: 10, marginRight: 5 }}>
+              <View style={styles.dropDownIconContainerStyle}>
                 <Image
                   source={require('../../images/dropdown_down.png')}
                   style={styles.dropdownIconStyle}
@@ -231,7 +233,7 @@ export const Header: React.FC<DayProps> = React.memo((props) => {
               style={{ flexDirection: 'row' }}
             >
               <Text style={styles.titleText}>{year}</Text>
-              <View style={{ marginTop: 10, marginRight: 5 }}>
+              <View style={styles.dropDownIconContainerStyle}>
                 <Image
                   source={require('../../images/dropdown_down.png')}
                   style={styles.dropdownIconStyle}

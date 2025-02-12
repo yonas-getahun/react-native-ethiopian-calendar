@@ -156,5 +156,9 @@ export const makeStyle = (theme: Theme = {}) => {
       alignItems: 'flex-end',
       marginRight: 20,
     } as ViewStyle,
+    dropDownIconContainerStyle: {
+      marginTop: 10,
+      marginRight: 5,
+    } as ViewStyle,
   });
 };
