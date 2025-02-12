@@ -13,8 +13,9 @@ A react native calendar component which is mainly intended for applications whic
 - Fully typed with typescript
 
 ## Newly Added Features
+
 - Month and year picker Modal
-- min and max Date 
+- min and max Date
 
 ## Demo
 
@@ -53,7 +54,7 @@ function App() {
 
   const maxDate = {
       year: today.getFullYear() + 18,
-      month: today.getMonth() + 1, 
+      month: today.getMonth() + 1,
       day: today.getDate(),
   }
 
@@ -103,18 +104,19 @@ function App() {
 
 ## API Reference
 
-| Prop                | Type            | Required | Description                                                          | Default                     |
-| :------------------ | :-------------- | :------- | :------------------------------------------------------------------- | :-------------------------- |
-| `mode`              | `Mode`          | `false`  | a prop to switch b/n Ethiopian calendar and Gregorian calendar       | `EC`                        |
-| `locale`            | `LanguageCode`  | `false`  | to change the language of days names and months names.               | `AMH for EC and ENG for GC` |
-| `theme`             | `Theme`         | `false`  | to override default style                                            | `{}`                        |
-| `hideHeaderButtons` | `boolean`       | `false`  | to hide switch mode & change language dropdowns.                     | `false`                     |
-| `onDatePress`       | `function void` | `true`   | an event handler gets executed when date press event is fired.       |                             |
-| `onModeChange`      | `function void` | `false`  | an event handler gets invoked on mode change.                        |                             |
-| `onLanguageChange`  | `function void` | `false`  | an event handler gets invoked on language change.                    |                             |
-| `initialDate`       | `Date`          | `false`  | if this prop is not set, the calendar will start from current month. | `today`                     |
-| `minDate`           | `Date`          | `false`  | to give minimum selectable date and date below the given will not be selectable. |                 |
-| `maxDate`           | `Date`          | `false`  | to give maximum selectable date and date above the given will not be selectable. |                 |
+| Prop                | Type            | Required | Description                                                                      | Default                     |
+| :------------------ | :-------------- | :------- | :------------------------------------------------------------------------------- | :-------------------------- |
+| `mode`              | `Mode`          | `false`  | a prop to switch b/n Ethiopian calendar and Gregorian calendar                   | `EC`                        |
+| `locale`            | `LanguageCode`  | `false`  | to change the language of days names and months names.                           | `AMH for EC and ENG for GC` |
+| `theme`             | `Theme`         | `false`  | to override default style                                                        | `{}`                        |
+| `hideHeaderButtons` | `boolean`       | `false`  | to hide switch mode & change language dropdowns.                                 | `false`                     |
+| `onDatePress`       | `function void` | `true`   | an event handler gets executed when date press event is fired.                   |                             |
+| `onModeChange`      | `function void` | `false`  | an event handler gets invoked on mode change.                                    |                             |
+| `onLanguageChange`  | `function void` | `false`  | an event handler gets invoked on language change.                                |                             |
+| `initialDate`       | `Date`          | `false`  | if this prop is not set, the calendar will start from current month.             | `today`                     |
+| `minDate`           | `Date`          | `false`  | to give minimum selectable date and date below the given will not be selectable. |                             |
+| `maxDate`           | `Date`          | `false`  | to give maximum selectable date and date above the given will not be selectable. |                             |
+
 
 ## License
 

@@ -1,6 +1,6 @@
 {
-  "name": "react-native-ethiopian-calendar",
-  "version": "0.3.0",
+  "name": "react-native-ethiopian-calendar-date-picker",
+  "version": "0.0.1",
   "description": "A react native calendar component which is mainly intended for applications which require Ethiopian calendar.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -48,13 +48,13 @@
     "calendar",
     "ui-component"
   ],
-  "repository": "https://github.com/leulseged3/react-native-ethiopian-calendar",
-  "author": "Leulseged Tilahun Tesera <leulseged3@gmail.com> (https://github.com/leulseged3)",
+  "repository": "https://github.com/yonas-getahun/react-native-ethiopian-calendar",
+  "author": "Yonas Getahun Chekol <yonasg57@gmail.com> (https://github.com/yonas-getahun)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/leulseged3/react-native-ethiopian-calendar/issues"
+    "url": "https://github.com/yonas-getahun/react-native-ethiopian-calendar/issues"
   },
-  "homepage": "https://github.com/leulseged3/react-native-ethiopian-calendar#readme",
+  "homepage": "https://github.com/yonas-getahun/react-native-ethiopian-calendar#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
